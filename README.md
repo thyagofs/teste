@@ -1,82 +1,134 @@
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/fluxo5.png)
-<br/>
-<br/>
+<img src="https://i.imgur.com/YOM5F41.png" />
 
-<h1>Whaticket Saas</h1>
-
-<h3>Instalação</h3>
-
-<p>Ubuntu 22.04</p>
+## 🚀 Whaticket Plus
 
 
-<code>apt update && apt upgrade -y && apt install sudo git -y && sudo rm -rf Connect.AI && sudo git clone https://github.com/andrew890074/Whaticket-Saas-Completo.git && cd Connect.AI && sudo chmod +x ./devconnectai && ./devconnectai</code><br />
+Experimente gratuitamente nosso sistema de tickets via WhatsApp e descubra como a integração com DialogFlow, N8N, Typebot 3, WebHooks, Facebook, Instagram e um poderoso Construtor de Fluxos Nativo para Chatbot pode transformar e potencializar seus atendimentos de forma exponencial!
 
+Integrado ao premiado Typebot 3, N8N e outras ferramentas de alta performance, ele transforma cada atendimento em uma experiência única e surpreendente, elevando sua comunicação a um nível de excelência que cria laços duradouros e conquista a confiança dos seus clientes.
 
+Sabemos como pode ser desafiador gerenciar múltiplos canais de comunicação. Por isso, nosso sistema de tickets via WhatsApp é projetado para facilitar sua vida, permitindo que você foque no que realmente importa: atender bem seus clientes.
 
-<h3>Atualização</h3>
+E o melhor: Tudo em um único lugar!
 
-<code>wget -qO- up.devconnectai.com.br/up.sh | bash</code><br />
-&nbsp;</p>
+Já imaginou?
 
+<br /><br />
 
-<h3>Whatsapp Suporte: +55 (51) 9957-9150<h3>
+## 📌 Integrações
 
-<h3>Grupo de Suporte: https://encurtador.com.br/Q9Yl5<h3>
-<br/>
+<img src="https://i.postimg.cc/CxJmZYZk/Group-26.png" />
 
-<h1>Demonstração</h1>
+<br /><br />
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/tela2.png)
+## 🔧 Requisitos
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/tela3.png)
+<img src="https://i.postimg.cc/kGRpDYJC/Group-27.png" style="height: 250px;" />
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/flow2.png)
+<nav>
+  <ul>
+    <li>Subdomínio para Frontend: https://app.nomedoseudominio.com</li>
+    <li>Subdomínio para API (Backend): https://api.nomedoseudominio.com</li>
+  </ul>
+</nav>
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/conexao.png)
+<br /><br />
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/campanha.jpeg)
+## 💿 Instalação
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/user.png)
+```bash
+  
+```
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/importar.png)
+<br /><br />
 
-![link About do site](https://github.com/andrew890074/Connect.AI/blob/main/demonstração/install.png)
+## ⭐ Recursos
 
-## Principais Funcionalidades
+ ✨ Agendamento Recorrente  
+✨ API Oficial da Meta  
+✨ Aplicativo PWA  
+✨ Áudio Gravado na Hora  
+✨ Atendentes  
+✨ Campanhas  
+✨ Campanhas Recorrentes  
+✨ Carteira de Clientes  
+✨ Chat Interno  
+✨ Construtor De Fluxos Para Chatbot  
+✨ Cores Personalizadas  
+✨ Dashboard  
+✨ Domínio Próprio  
+✨ Estatísticas  
+✨ Gerenciamento de Grupos  
+✨ Integração com o Pixel do Facebook: Acompanhe e registre conversões com o pixel do Facebook  
+✨ Integração com Site: Poder receber notificações de visitas  
+✨ Integração com Webhook: Utilize webhooks para conectar com outros sistemas e automatizar processos  
+✨ Logotipo / Marca Própria  
+✨ Marcação Fantasma em Grupos  
+✨ Mensagens Agendadas com Anexo  
+✨ Modo Claro/Escuro  
+✨ Recuperação de Senha por E-Mail  
+✨ Respostas Rápidas com Anexo  
+✨ SaaS  
+✨ Setores & Filas  
+✨ Tarefas  
 
-- 🤖 <strong>Palavra-Chave:<strong> Ative e alterne entre fluxos automaticamente utilizando palavras-chave.<br><br>
-- 🤖 <strong>Chatbot Inteligente:<strong> Configure seu chatbot por setor para respostas automatizadas.<br><br>
-- 🔗 <strong>Integração Com Sites:<strong> Monitore em tempo real e receba notificações instantâneas sobre os acessos ao seu site! <br><br>
-- 🔗 <strong>Integração Pixel Facebook:<strong> Acompanhe e registre conversões com o pixel do Facebook. <br><br>
-- 🔗 <strong>Integração Webhook:<strong> Utilize webhooks para conectar com outros sistemas e automatizar processos. <br><br>
-- 🔗 <strong>Integração Dialogflow:<strong> Integre com Dialogflow para adicionar funcionalidades avançadas de IA às conversas. <br><br>
-- 🔗 <strong>Integração Typebot:<strong> Integre com Typebot para criação de chatbots personalizados.<br><br>
-- 🔗 <strong>Integração n8n:<strong> Integre com n8n para automação de workflows.<br><br>
-- 🔗 <strong>Integração Asaas:<strong> Integre com Asaas para gestão de cobranças e pagamentos.<br><br>
-- 🔗 <strong>Integração PagHiper:<strong> Integre com PagHiper para buscar boletos.<br><br>
-- 🔊 <strong>Transcrever Áudios:<strong> Converta áudios recebidos em texto.<br><br>
-- 🌟 <strong>Atendimento Organizado:<strong> Adicione vários atendentes e defina por setores para uma gestão organizada.<br><br>
-- 📲 <strong>Adicionar Participantes:<strong> Integre novos participantes facilmente em conversas existentes.<br><br>
-- 📢 <strong>Campanhas Personalizadas:<strong> Crie campanhas com agendamento e utilize variáveis para comunicações personalizadas.<br><br>
-- 🗓️ <strong>Agendamento Recorrente:<strong> Automatize o envio de mensagens agendadas por contatos.<br><br>
-- 📁 <strong>Envio de Arquivos:<strong> Compartilhe imagens, vídeos, documentos e áudios de forma prática.<br><br>
-- 📈 <strong>Gerenciamento de Leads:<strong> Capture leads automaticamente ao receberem contato.<br><br>
-- ✉️ <strong>Mensagens Rápidas:<strong> Crie mensagens pré-configuradas para respostas ágeis.<br><br>
-- 🏷️ <strong>Tags Personalizadas:<strong> Adicione tags para um melhor gerenciamento e organização.<br><br>
-- 💼 <strong>Integração Financeira: Integre com<strong> sistemas de gestão financeira para uma visão completa.<br><br>
-- 🏢 <strong>Gerenciamento Empresarial:<strong> Cadastre múltiplas empresas para uma gestão ampla.<br><br>
+<br /><br />
 
-## Funcionalidades Via Api
+## ✅ Recursos via API
 
-- Enviar Mensagens ✅
-- Criar Empresas ✅
-- Criar Contatos ✅
-- Listar Contatos ✅
-- Atualizar Contatos ✅
-- Excluir Contatos ✅
-- Criar Tags ✅
-- Listar Tags ✅
-- Excluir Tags ✅
-- Criar Agendamento ✅
-- Listar Agendamento ✅
-- Excluir Agendamento ✅
+🟢 Introdução  
+🟢 Atualizar Contato  
+🟢 Atualizar Ticket  
+🟢 Criar Agendamento  
+🟢 Criar Contato  
+🟢 Criar Tag  
+🟢 Deletar Agendamento  
+🟢 Deletar Tag  
+🟢 Enviar Mensagem  
+🟢 Excluir Contato  
+🟢 Listar Agendamento  
+🟢 Listar Contato  
+🟢 Listar Tags  
+
+<br /><br />
+
+## ⚠️ Isenção de Responsabilidade
+
+Este projeto não é afiliado, associado, autorizado, endossado ou de qualquer forma oficialmente conectado ao WhatsApp ou a qualquer uma de suas subsidiárias ou afiliadas. O site oficial do WhatsApp pode ser encontrado em https://whatsapp.com. “WhatsApp”, bem como nomes, marcas, emblemas e imagens relacionados são marcas registradas de seus respectivos proprietários.
+
+<br /><br />
+
+## 📍 Github
+
+Codigo baseado no Whaticket Community de:
+<nav>
+  <ul>
+    <li><a href="https://github.com/canove/whaticket-community" target="_blank">Cassio Santos no GitHub</a></li>
+
+<br /><br />
+
+## 🛠️ Com as seguintes Ferramentas de Apoio:
+<nav>
+    <li><a href="https://developers.facebook.com/docs/?locale=pt_BR" target="_blank">API Oficial Meta - WhatsApp, Instagram DM, Facebook (Messenger)</a></li>
+    <li><a href="https://github.com/WhiskeySockets/Baileys" target="_blank">Baileys - WhatsApp Web API (free)</a></li>
+    <li><a href="https://github.com/redis/redis" target="_blank">Redis</a></li>
+    <li><a href="https://github.com/postgres/postgres" target="_blank">PostgreSQL</a></li>
+    <li><a href="https://github.com/docker" target="_blank">Docker</a></li>
+    <li><a href="https://github.com/nginx/nginx" target="_blank">Nginx</a></li>
+    <li><a href="https://github.com/nodejs/node" target="_blank">Node</a></li>
+    <li><a href="https://github.com/Unitech/pm2" target="_blank">PM2</a></li>
+    <li><a href="https://github.com/certbot/certbot" target="_blank">Certbot</a></li>
+  </ul>
+</nav>
+
+<br /><br />
+
+## 🙋 Suporte e Contato
+
+Entre em contato através do <a href="https://wa.me/555131916861" target="_blank">Whatsapp</a> ou <a href="mailto:whaticketplus@gmail.com" target="_blank">E-mail</a>.
+
+<br /><br />
+
+## 
+
+[![Star History Chart](https://api.star-history.com/svg?repos=DEV7Kadu/WhaticketPlus&type=Date)](https://star-history.com/#DEV7Kadu/WhaticketPlus&Date) 

@@ -9,15 +9,15 @@
 #######################################
 system_create_user() {
   print_banner
-  printf "${WHITE} 💻 Agora, vamos criar o usuário para deployautomatizaai...${GRAY_LIGHT}"
+  printf "${WHITE} 💻 Agora, vamos criar o usuário para deploywhaticketplus...${GRAY_LIGHT}"
   printf "\n\n"
 
   sleep 2
  
   sudo su - root <<EOF
-  useradd -m -p $(openssl passwd $deploy_password) -s /bin/bash -G sudo deployautomatizaai
-  usermod -aG sudo deployautomatizaai
-  mv "${PROJECT_ROOT}"/whaticket.zip /home/deployautomatizaai/
+  useradd -m -p $(openssl passwd $deploy_password) -s /bin/bash -G sudo deploywhaticketplus
+  usermod -aG sudo deploywhaticketplus
+  mv "${PROJECT_ROOT}"/whaticket.zip /home/deploywhaticketplus/
 EOF
 
   sleep 2
@@ -35,7 +35,7 @@ system_unzip_whaticket() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
+  sudo su - deploywhaticketplus <<EOF
   unzip whaticket.zip
 EOF
 
@@ -87,7 +87,7 @@ system_node_install() {
   sudo timedatectl set-timezone America/Sao_Paulo
   sleep 2
   sudo -u postgres psql -c "ALTER USER postgres PASSWORD '2000@23';"
-  sudo -u postgres psql -c "CREATE DATABASE whaticketautomatizaai;"
+  sudo -u postgres psql -c "CREATE DATABASE whaticketwhaticketplus;"
   exit
 EOF
 
@@ -239,8 +239,8 @@ system_pm2_install() {
 
   sudo su - root <<EOF
   npm install -g pm2
-  pm2 startup ubuntu -u deployautomatizaai
-  env PATH=\$PATH:/usr/bin pm2 startup ubuntu -u deployautomatizaai --hp /home/deployautomatizaai
+  pm2 startup ubuntu -u deploywhaticketplus
+  env PATH=\$PATH:/usr/bin pm2 startup ubuntu -u deploywhaticketplus --hp /home/deploywhaticketplus
 EOF
 
   sleep 2 
@@ -254,12 +254,12 @@ system_execute_comand() {
   sleep 2 
 
   sudo su - root <<EOF
-  usermod -aG sudo deployautomatizaai
+  usermod -aG sudo deploywhaticketplus
   sudo apt install ffmpeg
 
-  grep -q "^deployautomatizaai ALL=(ALL) NOPASSWD: ALL$" /etc/sudoers || echo "deployautomatizaai ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+  grep -q "^deploywhaticketplus ALL=(ALL) NOPASSWD: ALL$" /etc/sudoers || echo "deploywhaticketplus ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-  echo "deployautomatizaai ALL=(ALL) NOPASSWD: ALL" | EDITOR='tee -a' visudo
+  echo "deploywhaticketplus ALL=(ALL) NOPASSWD: ALL" | EDITOR='tee -a' visudo
   sudo apt install ffmpeg
 
 EOF
@@ -301,7 +301,7 @@ system_set_ufw() {
   sleep 2
 
   sudo su - root <<EOF
-  ufw allow 80/tcp && ufw allow 22/tcp && ufw allow 443/tcp && ufw allow 8080/tcp && ufw allow 8081/tcp && ufw allow 3000/tcp && ufw allow 9005/tcp && ufw allow 3003/tcp && ufw allow 6379/tcp && ufw allow 5432/tcp && ufw allow 443/tcp && ufw allow 9090/tcp
+  ufw allow 80/tcp && ufw allow 22/tcp && ufw allow 443/tcp && ufw allow 8080/tcp && ufw allow 8081/tcp && ufw allow 3000/tcp && ufw allow 9005/tcp && ufw allow 3003/tcp && ufw allow 6379/tcp && ufw allow 5432/tcp && ufw allow 443/tcp
 EOF
 
   sleep 2
@@ -424,8 +424,8 @@ system_certbot_setup() {
 
   sleep 2
 
-#  backend_domain=$(echo "${backend_url/https:\/\/}")
-#  frontend_domain=$(echo "${frontend_url/https:\/\/}")
+  backend_domain=$(echo "${backend_url/https:\/\/}")
+  frontend_domain=$(echo "${frontend_url/https:\/\/}")
 
 #  sudo su - root <<EOF
 #  certbot -m $deploy_email \
@@ -435,5 +435,5 @@ system_certbot_setup() {
 #          --domains $backend_domain,$frontend_domain
 #EOF
 
-#  sleep 2
+  sleep 2
 }

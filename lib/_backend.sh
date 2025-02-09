@@ -14,7 +14,7 @@ backend_redis_create() {
   sleep 2
 
   sudo su - root <<EOF
-  usermod -aG docker deployautomatizaai
+  usermod -aG docker deploywhaticketplus
   docker run --name redis-redis -p 6379:6379 --restart always --detach redis redis-server --requirepass ${db_pass}
   
 EOF
@@ -36,23 +36,24 @@ backend_set_env() {
   sleep 2
 
   # ensure idempotency
-  backend_url=$(echo "${backend_url/http:\/\/}")
+  backend_url=$(echo "${backend_url/https:\/\/}")
   backend_url=${backend_url%%/*}
-  backend_url=http://$backend_url
+  backend_url=https://$backend_url
 
   # ensure idempotency
-  frontend_url=$(echo "${frontend_url/http:\/\/}")
+  frontend_url=$(echo "${frontend_url/https:\/\/}")
   frontend_url=${frontend_url%%/*}
-  frontend_url=http://$frontend_url
+  frontend_url=https://$frontend_url
 
-sudo su - deployautomatizaai << EOF
-  cat <<[-]EOF > /home/deployautomatizaai/whaticket/backend/.env
+sudo su - deploywhaticketplus << EOF
+  cat <<[-]EOF > /home/deploywhaticketplus/whaticket/backend/.env
 NODE_ENV=
 
 # VARIÁVEIS DE SISTEMA
 BACKEND_URL=${backend_url}
 ALLOWED_ORIGINS=${frontend_url}
-PROXY_PORT=80
+FRONTEND_URL=${frontend_url}
+PROXY_PORT=443
 PORT=8080
 
 # CREDENCIAIS BANCO DE DADOS
@@ -61,7 +62,7 @@ DB_DIALECT=postgres
 DB_HOST=localhost
 DB_USER=postgres
 DB_PASS=2000@23
-DB_NAME=whaticketautomatizaai
+DB_NAME=whaticketwhaticketplus
 DB_PORT=5432
 DB_DEBUG=false
 DB_BACKUP=/www/wwwroot/backup
@@ -126,7 +127,7 @@ backend_chrome_install() {
 
   sudo su - root <<EOF
   sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  wget -q -O - http://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   apt-get update
   apt-get install -y google-chrome-stable
 EOF
@@ -146,8 +147,8 @@ backend_node_dependencies() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
   npm install --force
 EOF
 
@@ -166,8 +167,8 @@ backend_db_migrate() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
   npx sequelize db:migrate
 EOF
 
@@ -186,8 +187,8 @@ backend_db_seed() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
   npx sequelize db:seed:all
 EOF
 
@@ -207,9 +208,9 @@ backend_start_pm2() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend
-  pm2 start automatizaai/server.js --name whaticket-backend 
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
+  pm2 start whaticketplus/server.js --name whaticket-backend
 EOF
 
   sleep 2
@@ -227,7 +228,7 @@ backend_nginx_setup() {
 
   sleep 2
 
-  backend_hostname=$(echo "${backend_url/http:\/\/}")
+  backend_hostname=$(echo "${backend_url/https:\/\/}")
 
 sudo su - root << EOF
 

@@ -13,8 +13,8 @@ frontend_node_dependencies() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/frontend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/frontend
   npm install --force
 EOF
  
@@ -33,17 +33,17 @@ frontend_set_env() {
   sleep 2
 
   # Ensure idempotency
-  backend_url=$(echo "${backend_url/http:\/\/}")
+  backend_url=$(echo "${backend_url/https:\/\/}")
   backend_url=${backend_url%%/*}
-  backend_url=http://$backend_url
+  backend_url=https://$backend_url
 
-  sudo su - deployautomatizaai << EOF
-  cat <<[-]EOF > /home/deployautomatizaai/whaticket/frontend/.env
+  sudo su - deploywhaticketplus << EOF
+  cat <<[-]EOF > /home/deploywhaticketplus/whaticket/frontend/.env
 REACT_APP_BACKEND_URL=${backend_url}
 REACT_APP_ENV_TOKEN=210897ugn217204u98u8jfo2983u5
 REACT_APP_HOURS_CLOSE_TICKETS_AUTO=9999999
 REACT_APP_FACEBOOK_APP_ID=1005318707427295
-REACT_APP_NAME_SYSTEM=automatizaai
+REACT_APP_NAME_SYSTEM=whaticketplus
 REACT_APP_VERSION="1.0.0"
 REACT_APP_PRIMARY_COLOR=$#fffff
 REACT_APP_PRIMARY_DARK=2c3145
@@ -54,12 +54,12 @@ WDS_SOCKET_PORT=0
 EOF
 
   # Execute the substitution commands
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/frontend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/frontend
 
   BACKEND_URL=${backend_url}
 
-  sed -i "s|http://whaticket.xyz.com|\$BACKEND_URL|g" \$(grep -rl 'http://whaticket.xyz.com' .)
+  sed -i "s|https://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'https://autoriza.dominio' .)
 EOF
 
   sleep 2
@@ -77,8 +77,8 @@ frontend_start_pm2() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/frontend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/frontend
   pm2 start server.js --name whaticket-frontend
   pm2 save
 EOF
@@ -97,7 +97,7 @@ frontend_nginx_setup() {
 
   sleep 2
 
-  frontend_hostname=$(echo "${frontend_url/http:\/\/}")
+  frontend_hostname=$(echo "${frontend_url/https:\/\/}")
 
   sudo su - root << EOF
 
@@ -128,9 +128,14 @@ EOF
 
 system_unzip() {
   print_banner
-  printf "${WHITE} 💻 Fazendo unzip whaticket...${GRAY_LIGHT}\n\n"
+  printf "${WHITE} 💻 Fazendo unzip whaticket...${GRAY_LIGHT}"
+  printf "\n\n"
 
-  sudo unzip "${PROJECT_ROOT}"/whaticket.zip -d "/root/"
+  sleep 2
+
+  sudo su - root <<EOF
+  unzip "${PROJECT_ROOT}"/whaticket.zip
+EOF
 
   sleep 2
 }
@@ -146,32 +151,18 @@ move_whaticket_files() {
   sudo su - root <<EOF
 
 
-  sudo mkdir -p /home/deployautomatizaai/whaticket/backup/backend
-  sudo mkdir -p /home/deployautomatizaai/whaticket/backup/frontend
+  sudo rm -r /home/deploywhaticketplus/whaticket/frontend/whaticketplus
+  sudo rm -r /home/deploywhaticketplus/whaticket/frontend/package.json
+  sudo rm -r /home/deploywhaticketplus/whaticket/backend/whaticketplus
+  sudo rm -r /home/deploywhaticketplus/whaticket/backend/package.json
+  sudo rm -rf /home/deploywhaticketplus/whaticket/frontend/node_modules
+  sudo rm -rf /home/deploywhaticketplus/whaticket/backend/node_modules
 
-
-  sudo rm -r /home/deployautomatizaai/whaticket/backup/frontend/automatizaai
-  sudo rm -r /home/deployautomatizaai/whaticket/backup/backend/automatizaai
-
-  sudo mv /home/deployautomatizaai/whaticket/frontend/automatizaai /home/deployautomatizaai/whaticket/backup/frontend/
-  sudo mv /home/deployautomatizaai/whaticket/backend/automatizaai /home/deployautomatizaai/whaticket/backup/backend/
-  
-  sudo rm -r /home/deployautomatizaai/whaticket/frontend/package.json
-  sudo rm -r /home/deployautomatizaai/whaticket/backend/package.json
-
-
-  sudo rm -rf /home/deployautomatizaai/whaticket/frontend/node_modules
-  sudo rm -rf /home/deployautomatizaai/whaticket/backend/node_modules
-
-  sudo mv /root/whaticket/frontend/automatizaai /home/deployautomatizaai/whaticket/frontend
-  sudo mv /root/whaticket/frontend/package.json /home/deployautomatizaai/whaticket/frontend
-  sudo mv /root/whaticket/backend/ecosystem.config.js /home/deployautomatizaai/whaticket/backend
-  sudo mv /root/whaticket/backend/automatizaai /home/deployautomatizaai/whaticket/backend
-  sudo mv /root/whaticket/backend/package.json /home/deployautomatizaai/whaticket/backend
+  sudo mv /root/whaticket/frontend/whaticketplus /home/deploywhaticketplus/whaticket/frontend
+  sudo mv /root/whaticket/frontend/package.json /home/deploywhaticketplus/whaticket/frontend
+  sudo mv /root/whaticket/backend/whaticketplus /home/deploywhaticketplus/whaticket/backend
+  sudo mv /root/whaticket/backend/package.json /home/deploywhaticketplus/whaticket/backend
   sudo rm -rf /root/whaticket
-  npm cache clean --force
-  npm cache clean --force
-  npm cache clean --force
   sudo apt update
   sudo apt install ffmpeg
 
@@ -188,16 +179,16 @@ frontend_conf1() {
   sleep 2
 
   # Ensure idempotency
-  backend_url=$(echo "${backend_url/http:\/\/}")
+  backend_url=$(echo "${backend_url/https:\/\/}")
   backend_url=${backend_url%%/*}
-  backend_url=http://$backend_url
+  backend_url=https://$backend_url
 
   sudo su - root <<EOF
-  cd /home/deployautomatizaai/whaticket/frontend
+  cd /home/deploywhaticketplus/whaticket/frontend
 
   BACKEND_URL=${backend_url}
 
-  sed -i "s|http://whaticket.xyz.com|\$BACKEND_URL|g" \$(grep -rl 'http://whaticket.xyz.com' .)
+  sed -i "s|https://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'https://autoriza.dominio' .)
 EOF
 
   sleep 2
@@ -210,8 +201,8 @@ frontend_node_dependencies1() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/frontend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/frontend
   npm install --force
 EOF
 
@@ -225,16 +216,11 @@ frontend_restart_pm2() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/frontend
-  pm2 delete whaticket-frontend
-  pm2 delete waticket-backend
-  pm2 start server.js --name whaticket-frontend -i max
-
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/frontend
   pm2 stop all
 
   pm2 start all
-
 EOF
 
   sleep 2
@@ -247,12 +233,9 @@ backend_node_dependencies1() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend 
-
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
   npm install --force
- 
-  pm2 save
 EOF
 
   sleep 2
@@ -265,16 +248,16 @@ backend_db_migrate1() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
   npx sequelize db:migrate
 
 EOF
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-  cd /home/deployautomatizaai/whaticket/backend
+  sudo su - deploywhaticketplus <<EOF
+  cd /home/deploywhaticketplus/whaticket/backend
   npx sequelize db:migrate
   
 EOF
@@ -289,34 +272,25 @@ backend_restart_pm2() {
 
   sleep 2
 
-  sudo su - deployautomatizaai <<EOF
-    cd /home/deployautomatizaai/whaticket/backend
+  sudo su - deploywhaticketplus <<EOF
+    cd /home/deploywhaticketplus/whaticket/backend
     pm2 stop all
-    sudo rm -rf /root/WhaticketWorkflow
+    sudo rm -rf /root/Whaticket-Saas-Completo
 EOF
 
   sleep 2
 
   sudo su - <<EOF
-    usermod -aG sudo deployautomatizaai
+    usermod -aG sudo deploywhaticketplus
 
-    grep -q "^deployautomatizaai ALL=(ALL) NOPASSWD: ALL$" /etc/sudoers || echo "deployautomatizaai ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+    grep -q "^deploywhaticketplus ALL=(ALL) NOPASSWD: ALL$" /etc/sudoers || echo "deploywhaticketplus ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
-    echo "deployautomatizaai ALL=(ALL) NOPASSWD: ALL" | EDITOR='tee -a' visudo
+    echo "deploywhaticketplus ALL=(ALL) NOPASSWD: ALL" | EDITOR='tee -a' visudo
 EOF
 
-  sudo su - deployautomatizaai <<EOF
-
+  sudo su - deploywhaticketplus <<EOF
     pm2 start all
-    pm2 save
-EOF
-  sudo su - <<EOF
-    chown -R deployautomatizaai:deployautomatizaai /home/deployautomatizaai/whaticket/backend
-    chmod -R 777 /home/deployautomatizaai/whaticket/backend
-    chown -R deployautomatizaai:deployautomatizaai /home/deployautomatizaai/whaticket/frontend
-    chmod -R 777 /home/deployautomatizaai/whaticket/frontend
 EOF
 
   sleep 2
-  echo "${GREEN}Sistema Atualizado Com Sucesso!${NORMAL}"
 }
