@@ -424,16 +424,16 @@ system_certbot_setup() {
 
   sleep 2
 
-  backend_domain=$(echo "${backend_url/https:\/\/}")
-  frontend_domain=$(echo "${frontend_url/https:\/\/}")
+#  backend_domain=$(echo "${backend_url/https:\/\/}")
+#  frontend_domain=$(echo "${frontend_url/https:\/\/}")
 
-  sudo su - root <<EOF
-  certbot -m $deploy_email \
-          --nginx \
-          --agree-tos \
-          --non-interactive \
-          --domains $backend_domain,$frontend_domain
-EOF
+#  sudo su - root <<EOF
+#  certbot -m $deploy_email \
+#          --nginx \
+#          --agree-tos \
+#          --non-interactive \
+#          --domains $backend_domain,$frontend_domain
+#EOF
 
-  sleep 2
+#  sleep 2
 }

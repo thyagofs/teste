@@ -36,14 +36,14 @@ backend_set_env() {
   sleep 2
 
   # ensure idempotency
-  backend_url=$(echo "${backend_url/https:\/\/}")
+  backend_url=$(echo "${backend_url/http:\/\/}")
   backend_url=${backend_url%%/*}
-  backend_url=https://$backend_url
+  backend_url=http://$backend_url
 
   # ensure idempotency
-  frontend_url=$(echo "${frontend_url/https:\/\/}")
+  frontend_url=$(echo "${frontend_url/http:\/\/}")
   frontend_url=${frontend_url%%/*}
-  frontend_url=https://$frontend_url
+  frontend_url=http://$frontend_url
 
 sudo su - deployautomatizaai << EOF
   cat <<[-]EOF > /home/deployautomatizaai/whaticket/backend/.env
@@ -52,7 +52,7 @@ NODE_ENV=
 # VARIÁVEIS DE SISTEMA
 BACKEND_URL=${backend_url}
 ALLOWED_ORIGINS=${frontend_url}
-PROXY_PORT=443
+PROXY_PORT=80
 PORT=8080
 
 # CREDENCIAIS BANCO DE DADOS
@@ -126,7 +126,7 @@ backend_chrome_install() {
 
   sudo su - root <<EOF
   sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-  wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+  wget -q -O - http://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
   apt-get update
   apt-get install -y google-chrome-stable
 EOF
@@ -227,7 +227,7 @@ backend_nginx_setup() {
 
   sleep 2
 
-  backend_hostname=$(echo "${backend_url/https:\/\/}")
+  backend_hostname=$(echo "${backend_url/http:\/\/}")
 
 sudo su - root << EOF
 

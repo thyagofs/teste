@@ -33,9 +33,9 @@ frontend_set_env() {
   sleep 2
 
   # Ensure idempotency
-  backend_url=$(echo "${backend_url/https:\/\/}")
+  backend_url=$(echo "${backend_url/http:\/\/}")
   backend_url=${backend_url%%/*}
-  backend_url=https://$backend_url
+  backend_url=http://$backend_url
 
   sudo su - deployautomatizaai << EOF
   cat <<[-]EOF > /home/deployautomatizaai/whaticket/frontend/.env
@@ -59,7 +59,7 @@ EOF
 
   BACKEND_URL=${backend_url}
 
-  sed -i "s|https://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'https://autoriza.dominio' .)
+  sed -i "s|http://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'http://autoriza.dominio' .)
 EOF
 
   sleep 2
@@ -97,7 +97,7 @@ frontend_nginx_setup() {
 
   sleep 2
 
-  frontend_hostname=$(echo "${frontend_url/https:\/\/}")
+  frontend_hostname=$(echo "${frontend_url/http:\/\/}")
 
   sudo su - root << EOF
 
@@ -188,16 +188,16 @@ frontend_conf1() {
   sleep 2
 
   # Ensure idempotency
-  backend_url=$(echo "${backend_url/https:\/\/}")
+  backend_url=$(echo "${backend_url/http:\/\/}")
   backend_url=${backend_url%%/*}
-  backend_url=https://$backend_url
+  backend_url=http://$backend_url
 
   sudo su - root <<EOF
   cd /home/deployautomatizaai/whaticket/frontend
 
   BACKEND_URL=${backend_url}
 
-  sed -i "s|https://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'https://autoriza.dominio' .)
+  sed -i "s|http://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'http://autoriza.dominio' .)
 EOF
 
   sleep 2
