@@ -59,7 +59,7 @@ EOF
 
   BACKEND_URL=${backend_url}
 
-  sed -i "s|http://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'http://autoriza.dominio' .)
+  sed -i "s|http://whaticket.xyz.com|\$BACKEND_URL|g" \$(grep -rl 'http://whaticket.xyz.com' .)
 EOF
 
   sleep 2
@@ -197,7 +197,7 @@ frontend_conf1() {
 
   BACKEND_URL=${backend_url}
 
-  sed -i "s|http://autoriza.dominio|\$BACKEND_URL|g" \$(grep -rl 'http://autoriza.dominio' .)
+  sed -i "s|http://whaticket.xyz.com|\$BACKEND_URL|g" \$(grep -rl 'http://whaticket.xyz.com' .)
 EOF
 
   sleep 2
